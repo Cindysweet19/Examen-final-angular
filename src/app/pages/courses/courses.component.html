@@ -1,0 +1,51 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card p-3 mb-3">
+        <h5>{{ isEdit ? 'Editar curso' : 'Nuevo curso' }}</h5>
+        <div class="mb-2">
+          <label class="form-label">Título</label>
+          <input class="form-control" [(ngModel)]="selected.title">
+        </div>
+        <div class="mb-2">
+          <label class="form-label">Profesor</label>
+          <input class="form-control" [(ngModel)]="selected.teacher">
+        </div>
+        <div class="mb-2">
+          <label class="form-label">Estado</label>
+          <select class="form-select" [(ngModel)]="selected.status">
+            <option>Activo</option>
+            <option>Inactivo</option>
+          </select>
+        </div>
+        <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+        <button class="btn btn-primary me-2" (click)="save()">Guardar</button>
+        <button class="btn btn-secondary" (click)="newCourse()">Limpiar</button>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <h4>Listado de cursos</h4>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Profesor</th>
+            <th>Estado</th>
+            <th style="width:140px;">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of courses">
+            <td>{{ c.title }}</td>
+            <td>{{ c.teacher }}</td>
+            <td>{{ c.status }}</td>
+            <td>
+              <button class="btn btn-sm btn-warning me-1" (click)="editCourse(c)">Editar</button>
+              <button class="btn btn-sm btn-danger" (click)="delete(c)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
