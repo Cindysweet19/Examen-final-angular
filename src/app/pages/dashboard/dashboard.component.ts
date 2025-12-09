@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
   totalCourses = 0;
   totalProfesores = 0;
   totalEstudiantes = 0;
+  role: string = ''; // ⬅ NUEVO
 
   constructor(
     private usersService: UsersService,
@@ -22,6 +23,8 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.role = this.auth.getRole() || 'sin rol';
+
     this.usersService.list().subscribe((users: any[]) => {
       this.totalUsers = users.length;
       this.totalProfesores = users.filter(u => u.role === 'profesor').length;
