@@ -1,31 +1,55 @@
-<div class="container mt-4">
+<div class="container mt-2">
+
+  <!-- Header del módulo -->
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <h5 class="mb-0">Gestión de Cursos</h5>
+    <a class="btn btn-outline-primary btn-sm" routerLink="/dashboard">
+      ← Dashboard
+    </a>
+  </div>
+
   <div class="row">
+    <!-- Formulario -->
     <div class="col-md-4">
       <div class="card p-3 mb-3">
-        <h5>{{ isEdit ? 'Editar curso' : 'Nuevo curso' }}</h5>
+        <h6 class="mb-3">
+          {{ isEdit ? 'Editar curso' : 'Nuevo curso' }}
+        </h6>
+
         <div class="mb-2">
           <label class="form-label">Título</label>
           <input class="form-control" [(ngModel)]="selected.title">
         </div>
+
         <div class="mb-2">
           <label class="form-label">Profesor</label>
           <input class="form-control" [(ngModel)]="selected.teacher">
         </div>
-        <div class="mb-2">
+
+        <div class="mb-3">
           <label class="form-label">Estado</label>
           <select class="form-select" [(ngModel)]="selected.status">
             <option>Activo</option>
             <option>Inactivo</option>
           </select>
         </div>
-        <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
-        <button class="btn btn-primary me-2" (click)="save()">Guardar</button>
-        <button class="btn btn-secondary" (click)="newCourse()">Limpiar</button>
+
+        <div *ngIf="error" class="alert alert-danger py-2 mb-2">
+          {{ error }}
+        </div>
+
+        <div class="d-flex gap-2">
+          <button class="btn btn-primary btn-sm" (click)="save()">Guardar</button>
+          <button class="btn btn-secondary btn-sm" (click)="newCourse()">Limpiar</button>
+        </div>
       </div>
     </div>
+
+    <!-- Listado -->
     <div class="col-md-8">
-      <h4>Listado de cursos</h4>
-      <table class="table table-striped">
+      <h6 class="mb-2">Listado de cursos</h6>
+
+      <table class="table table-striped table-sm">
         <thead>
           <tr>
             <th>Título</th>
@@ -40,8 +64,16 @@
             <td>{{ c.teacher }}</td>
             <td>{{ c.status }}</td>
             <td>
-              <button class="btn btn-sm btn-warning me-1" (click)="editCourse(c)">Editar</button>
-              <button class="btn btn-sm btn-danger" (click)="delete(c)">Eliminar</button>
+              <button
+                class="btn btn-sm btn-warning me-1"
+                (click)="editCourse(c)">
+                Editar
+              </button>
+              <button
+                class="btn btn-sm btn-danger"
+                (click)="delete(c)">
+                Eliminar
+              </button>
             </td>
           </tr>
         </tbody>

@@ -1,17 +1,32 @@
-<div class="container mt-4">
+<div class="container mt-2">
+
+  <!-- Header del módulo -->
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <h5 class="mb-0">Gestión de Usuarios</h5>
+    <a class="btn btn-outline-primary btn-sm" routerLink="/dashboard">
+      ← Dashboard
+    </a>
+  </div>
+
   <div class="row">
+    <!-- Formulario -->
     <div class="col-md-4">
       <div class="card p-3 mb-3">
-        <h5>{{ isEdit ? 'Editar usuario' : 'Nuevo usuario' }}</h5>
+        <h6 class="mb-3">
+          {{ isEdit ? 'Editar usuario' : 'Nuevo usuario' }}
+        </h6>
+
         <div class="mb-2">
           <label class="form-label">Nombre</label>
           <input class="form-control" [(ngModel)]="selected.name">
         </div>
+
         <div class="mb-2">
           <label class="form-label">Email</label>
           <input class="form-control" [(ngModel)]="selected.email">
         </div>
-        <div class="mb-2">
+
+        <div class="mb-3">
           <label class="form-label">Rol</label>
           <select class="form-select" [(ngModel)]="selected.role">
             <option value="admin">Admin</option>
@@ -19,14 +34,23 @@
             <option value="estudiante">Estudiante</option>
           </select>
         </div>
-        <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
-        <button class="btn btn-primary me-2" (click)="save()">Guardar</button>
-        <button class="btn btn-secondary" (click)="newUser()">Limpiar</button>
+
+        <div *ngIf="error" class="alert alert-danger py-2 mb-2">
+          {{ error }}
+        </div>
+
+        <div class="d-flex gap-2">
+          <button class="btn btn-primary btn-sm" (click)="save()">Guardar</button>
+          <button class="btn btn-secondary btn-sm" (click)="newUser()">Limpiar</button>
+        </div>
       </div>
     </div>
+
+    <!-- Listado -->
     <div class="col-md-8">
-      <h4>Listado de usuarios</h4>
-      <table class="table table-striped">
+      <h6 class="mb-2">Listado de usuarios</h6>
+
+      <table class="table table-striped table-sm">
         <thead>
           <tr>
             <th>Nombre</th>
@@ -41,8 +65,16 @@
             <td>{{ u.email }}</td>
             <td>{{ u.role }}</td>
             <td>
-              <button class="btn btn-sm btn-warning me-1" (click)="editUser(u)">Editar</button>
-              <button class="btn btn-sm btn-danger" (click)="delete(u)">Eliminar</button>
+              <button
+                class="btn btn-sm btn-warning me-1"
+                (click)="editUser(u)">
+                Editar
+              </button>
+              <button
+                class="btn btn-sm btn-danger"
+                (click)="delete(u)">
+                Eliminar
+              </button>
             </td>
           </tr>
         </tbody>
